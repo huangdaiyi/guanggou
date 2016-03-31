@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hlhj.guanggou.mapper.AdornmentMapper" >
+  <resultMap id="BaseResultMap" type="com.hlhj.guanggou.po.Adornment" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, image_url, description, shop_id, market_id, create_user, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hlhj.guanggou.po.AdornmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_adornment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_adornment
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_adornment
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hlhj.guanggou.po.AdornmentExample" >
+    delete from t_adornment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hlhj.guanggou.po.Adornment" >
+    insert into t_adornment (id, name, image_url, 
+      description, shop_id, market_id, 
+      create_user, create_time)
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hlhj.guanggou.po.Adornment" >
+    insert into t_adornment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hlhj.guanggou.po.AdornmentExample" resultType="java.lang.Integer" >
+    select count(*) from t_adornment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_adornment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageUrl != null" >
+        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketId != null" >
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_adornment
+    set id = #{record.id,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=VARCHAR},
+      market_id = #{record.marketId,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hlhj.guanggou.po.Adornment" >
+    update t_adornment
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hlhj.guanggou.po.Adornment" >
+    update t_adornment
+    set name = #{name,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      market_id = #{marketId,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
