@@ -21,7 +21,7 @@ public enum CombinationStatus {
 	@JsonCreator
 	public static CombinationStatus parse(String status){
 		for (CombinationStatus item : CombinationStatus.values()) {
-			if(item.getStatus() == status){
+			if(item.getStatus().equals(status)){
 				return item;
 			}
 		}

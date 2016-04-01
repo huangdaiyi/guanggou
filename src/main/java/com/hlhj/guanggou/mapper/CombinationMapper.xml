@@ -1,306 +1,232 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hlhj.guanggou.mapper.CombinationMapper" >
-  <resultMap id="BaseResultMap" type="com.hlhj.guanggou.po.Combination" >
-    <id column="id" property="id" jdbcType="CHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="BIGINT" />
-    <result column="last_edit_time" property="lastEditTime" jdbcType="BIGINT" />
-    <result column="is_delete" property="isDelete" jdbcType="BIT" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    id, name, user_id, description, image_url, status, price, create_user, create_time, 
-    last_edit_time, is_delete
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hlhj.guanggou.po.CombinationExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_combination
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_combination
-    where id = #{id,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_combination
-    where id = #{id,jdbcType=CHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.hlhj.guanggou.po.CombinationExample" >
-    delete from t_combination
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.hlhj.guanggou.po.Combination" >
-    insert into t_combination (id, name, user_id, 
-      description, image_url, status, 
-      price, create_user, create_time, 
-      last_edit_time, is_delete)
-    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{price,jdbcType=DECIMAL}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
-      #{lastEditTime,jdbcType=BIGINT}, #{isDelete,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hlhj.guanggou.po.Combination" >
-    insert into t_combination
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="imageUrl != null" >
-        image_url,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="createUser != null" >
-        create_user,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="lastEditTime != null" >
-        last_edit_time,
-      </if>
-      <if test="isDelete != null" >
-        is_delete,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=CHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="imageUrl != null" >
-        #{imageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="lastEditTime != null" >
-        #{lastEditTime,jdbcType=BIGINT},
-      </if>
-      <if test="isDelete != null" >
-        #{isDelete,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.hlhj.guanggou.po.CombinationExample" resultType="java.lang.Integer" >
-    select count(*) from t_combination
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update t_combination
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=CHAR},
-      </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.imageUrl != null" >
-        image_url = #{record.imageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=CHAR},
-      </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=DECIMAL},
-      </if>
-      <if test="record.createUser != null" >
-        create_user = #{record.createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=BIGINT},
-      </if>
-      <if test="record.lastEditTime != null" >
-        last_edit_time = #{record.lastEditTime,jdbcType=BIGINT},
-      </if>
-      <if test="record.isDelete != null" >
-        is_delete = #{record.isDelete,jdbcType=BIT},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update t_combination
-    set id = #{record.id,jdbcType=CHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      image_url = #{record.imageUrl,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=CHAR},
-      price = #{record.price,jdbcType=DECIMAL},
-      create_user = #{record.createUser,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=BIGINT},
-      last_edit_time = #{record.lastEditTime,jdbcType=BIGINT},
-      is_delete = #{record.isDelete,jdbcType=BIT}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hlhj.guanggou.po.Combination" >
-    update t_combination
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="imageUrl != null" >
-        image_url = #{imageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="createUser != null" >
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="lastEditTime != null" >
-        last_edit_time = #{lastEditTime,jdbcType=BIGINT},
-      </if>
-      <if test="isDelete != null" >
-        is_delete = #{isDelete,jdbcType=BIT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hlhj.guanggou.po.Combination" >
-    update t_combination
-    set name = #{name,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      image_url = #{imageUrl,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      price = #{price,jdbcType=DECIMAL},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      last_edit_time = #{lastEditTime,jdbcType=BIGINT},
-      is_delete = #{isDelete,jdbcType=BIT}
-    where id = #{id,jdbcType=CHAR}
-  </update>
+<mapper namespace="com.hlhj.guanggou.mapper.CombinationMapper">
+	<resultMap id="BaseResultMap" type="com.hlhj.guanggou.po.Combination">
+		<id column="id" property="id" jdbcType="CHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="BIGINT" />
+		<result column="last_edit_time" property="lastEditTime"
+			jdbcType="BIGINT" />
+		<result column="is_delete" property="isDelete" jdbcType="BIT" />
+	</resultMap>
+	<resultMap id="CombinationDetailResult" type="com.hlhj.guanggou.result.CombinationDetailResult">
+		<association property="combinationinfo" javaType="com.hlhj.guanggou.po.Combination">
+			 <id property="id" column="c_id"/>
+			 <result property="name" column="c_name"></result>
+			 <result property="userId" column="user_id"></result>
+			 <result property="description" column="description"></result>
+			 <result property="imageUrl" column="c_image_url"></result>
+			 <result property="status" column="status"></result>
+			 <result property="price" column="c_price"></result>
+			 <result property="createUser" column="create_user"></result>
+			 <result property="createTime" column="create_time"></result>
+			 <result property="lastEditTime" column="last_edit_time"></result>
+		</association>
+		<collection property="products" javaType="com.hlhj.guanggou.po.Product">
+			<id property="id"  column="p_id"></id>
+			<result property="name" column="p_name"></result>
+			<result property="price" column="p_price"></result>
+			<result property="imageUrl" column="p_pictrue"></result>
+			<result property="number" column="product_num"></result>
+			<result property="catalogId" column="p_catalogId"></result>
+		</collection>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, user_id, description, image_url, status, price, create_user,
+		create_time,
+		last_edit_time, is_delete
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_combination
+		where id = #{id,jdbcType=CHAR}
+	</select>
+	<select id="selectPaging" resultMap="BaseResultMap"
+		parameterType="com.hlhj.guanggou.param.PagingCombinationParam">
+		select
+		<include refid="Base_Column_List" />
+		from t_combination
+		where status = #{status, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler} 
+		order by last_edit_time desc 
+		limit #{pageIndex, jdbcType=INTEGER} * #{pageSize, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER} 
+	</select>
+	<select id="getCombinationDetail" resultMap="CombinationDetailResult">
+		select p.`id` as p_id, 
+					p.`name` as p_name,
+					p.price as p_price,
+					p.picture as p_pictrue,
+					p.catalogID as p_catalogId, 
+					cp.product_num,
+					c.id as c_id, 
+					c.`name` as c_name, 
+					c.user_id, 
+					c.description, 
+					c.image_url as c_image_url, 
+					c.`status`, 
+					c.price as c_price, 
+					c.create_user,
+					c.create_time,
+					c.last_edit_time 
+			from t_product p 
+			inner join t_combination_product cp on p.id = cp.product_id
+			inner join t_combination c
+			where cp.combination_id = #{combinationId} and c.user_id = #{userId}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_combination
+		where id = #{id,jdbcType=CHAR}
+	</delete>
+	
+	<delete id="deleteByIds" >
+		delete from t_combination
+		where user_id = #{userId,jdbcType=CHAR} 
+		<foreach collection="combinationIds" item="item" index="index" open=" and id in (" separator="," close=")" >
+			#{item,jdbcType=CHAR}
+		</foreach>
+	</delete>
+	
+	<insert id="insert" parameterType="com.hlhj.guanggou.po.Combination">
+		insert into t_combination (id, name, user_id,
+		description, image_url, status,
+		price, create_user, create_time,
+		last_edit_time, is_delete)
+		values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+		#{price,jdbcType=DECIMAL}, #{createUser,jdbcType=VARCHAR},
+		#{createTime,jdbcType=BIGINT},
+		#{lastEditTime,jdbcType=BIGINT}, #{isDelete,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hlhj.guanggou.po.Combination">
+		insert into t_combination
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="imageUrl != null">
+				image_url,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="createUser != null">
+				create_user,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="lastEditTime != null">
+				last_edit_time,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="imageUrl != null">
+				#{imageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=BIGINT},
+			</if>
+			<if test="lastEditTime != null">
+				#{lastEditTime,jdbcType=BIGINT},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hlhj.guanggou.po.Combination">
+		update t_combination
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="imageUrl != null">
+				image_url = #{imageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=BIGINT},
+			</if>
+			<if test="lastEditTime != null">
+				last_edit_time = #{lastEditTime,jdbcType=BIGINT},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hlhj.guanggou.po.Combination">
+		update t_combination
+		set name = #{name,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		image_url = #{imageUrl,jdbcType=VARCHAR},
+		status = #{status,jdbcType=CHAR},
+		price = #{price,jdbcType=DECIMAL},
+		create_user = #{createUser,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=BIGINT},
+		last_edit_time = #{lastEditTime,jdbcType=BIGINT},
+		is_delete = #{isDelete,jdbcType=BIT}
+		where id = #{id,jdbcType=CHAR}
+	</update>
 </mapper>

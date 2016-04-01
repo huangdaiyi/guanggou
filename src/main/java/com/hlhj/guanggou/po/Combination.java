@@ -2,6 +2,8 @@ package com.hlhj.guanggou.po;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Combination {
     private String id;
 
@@ -18,17 +20,20 @@ public class Combination {
     private BigDecimal price;
 
     private String createUser;
-
+    
+    @JsonIgnore
     private Long createTime;
-
+    
+    @JsonIgnore
     private Long lastEditTime;
-
+    
+    @JsonIgnore
     private Boolean isDelete;
 
     public String getId() {
         return id;
     }
-
+    
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }

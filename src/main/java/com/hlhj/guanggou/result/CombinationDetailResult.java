@@ -3,7 +3,7 @@ package com.hlhj.guanggou.result;
 import com.hlhj.guanggou.po.Combination;
 import com.hlhj.guanggou.po.Product;
 
-public class CombinationResult {
+public class CombinationDetailResult {
 	private Combination combinationinfo;
 	private Product products;
 	

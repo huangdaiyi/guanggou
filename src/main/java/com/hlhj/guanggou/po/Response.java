@@ -62,5 +62,10 @@ public class Response {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	public static Response getResponse(int effect) {
+		Response response = new Response();
+		return effect > 0 ? response.success() : response.failure();
+	}
 
 }

@@ -2,7 +2,7 @@ package com.hlhj.guanggou.param;
 
 import com.hlhj.guanggou.constant.CombinationStatus;
 
-public class PagingCombinationParam extends BaseParam {
+public class PagingCombinationParam extends PagingParam {
 	
 	private CombinationStatus status;
 

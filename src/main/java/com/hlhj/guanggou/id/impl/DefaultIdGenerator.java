@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @author huangdaiyi
  * @since 1.0.0
  */
-@Component
+@Component("idGenerator")
 public class DefaultIdGenerator implements IdGenerator {
 
     @Override

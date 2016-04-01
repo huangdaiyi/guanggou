@@ -4,16 +4,8 @@ public class CombinationProductKey {
     private String combinationId;
 
     private Integer productId;
-    
-    
-    
-    public CombinationProductKey(String combinationId, Integer productId) {
-		super();
-		this.combinationId = combinationId;
-		this.productId = productId;
-	}
 
-	public String getCombinationId() {
+    public String getCombinationId() {
         return combinationId;
     }
 

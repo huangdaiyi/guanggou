@@ -1,23 +1,27 @@
 package com.hlhj.guanggou.service;
 
+import java.util.List;
+
 import com.hlhj.guanggou.param.CombinationParam;
+import com.hlhj.guanggou.param.DelCombinationByIdParam;
+import com.hlhj.guanggou.param.GetCombinationDetailParam;
 import com.hlhj.guanggou.param.PagingCombinationParam;
+import com.hlhj.guanggou.param.UpdateCombinationParam;
 import com.hlhj.guanggou.po.Combination;
-import com.hlhj.guanggou.po.Paging;
 import com.hlhj.guanggou.po.Response;
-import com.hlhj.guanggou.result.CombinationResult;
+import com.hlhj.guanggou.result.CombinationDetailResult;
 
 public interface CombinationService {
 	
 	Response insert(CombinationParam combination);
 	
-	Paging<Combination> getCombinationPaging(PagingCombinationParam param);
+	List<Combination> getCombinationPaging(PagingCombinationParam param);
 	
-	CombinationResult getCombinationDetail(String userId, String combinationId);
+	CombinationDetailResult getCombinationDetail(GetCombinationDetailParam param);
 	
-	Response deleteCombinationByIds(String userId, String[] combinatioinIds);
+	Response deleteCombinationByIds(DelCombinationByIdParam param);
 	
-	Response updateCombination(CombinationParam combination);
+	Response updateCombination(UpdateCombinationParam combination);
 	
 	Response pulishCombination(String combinationId);
 

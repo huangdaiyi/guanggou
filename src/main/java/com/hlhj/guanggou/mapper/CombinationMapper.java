@@ -1,30 +1,29 @@
 package com.hlhj.guanggou.mapper;
 
-import com.hlhj.guanggou.po.Combination;
-import com.hlhj.guanggou.po.CombinationExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.hlhj.guanggou.param.PagingCombinationParam;
+import com.hlhj.guanggou.po.Combination;
+import com.hlhj.guanggou.result.CombinationDetailResult;
+
 public interface CombinationMapper {
-    int countByExample(CombinationExample example);
-
-    int deleteByExample(CombinationExample example);
-
     int deleteByPrimaryKey(String id);
 
     int insert(Combination record);
 
     int insertSelective(Combination record);
 
-    List<Combination> selectByExample(CombinationExample example);
-
     Combination selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") Combination record, @Param("example") CombinationExample example);
-
-    int updateByExample(@Param("record") Combination record, @Param("example") CombinationExample example);
 
     int updateByPrimaryKeySelective(Combination record);
 
     int updateByPrimaryKey(Combination record);
+    
+    List<Combination> selectPaging(PagingCombinationParam param);
+    
+    int deleteByIds(@Param("userId") String userId, @Param("combinationIds") String[] ids);
+    
+    public CombinationDetailResult getCombinationDetail(@Param("userId") String userId, @Param("combinationId")String combinationId); 
 }

@@ -7,6 +7,8 @@ public class Product {
 	private String name;
 	private BigDecimal price;
 	private String imageUrl;
+	private int number;
+	private String catalogId;
 	
 	public int getId() {
 		return id;
@@ -31,6 +33,18 @@ public class Product {
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public String getCatalogId() {
+		return catalogId;
+	}
+	public void setCatalogId(String catalogId) {
+		this.catalogId = catalogId;
 	}
 	
 }

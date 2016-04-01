@@ -1,20 +1,13 @@
 package com.hlhj.guanggou.po;
 
 public class CombinationProduct extends CombinationProductKey {
-	
-	private Integer productNum;
+    private Integer number;
 
-    public Integer getProductNum() {
-        return productNum;
+    public Integer getNumber() {
+        return number;
     }
-    
-    public CombinationProduct(String combinationId, Integer productId) {
-		super(combinationId, productId);
-		this.productNum = 1;
-	}
-   
 
-    public void setProductNum(Integer productNum) {
-        this.productNum = productNum;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }
