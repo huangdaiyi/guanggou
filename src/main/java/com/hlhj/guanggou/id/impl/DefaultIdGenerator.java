@@ -6,15 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.stereotype.Component;
-
 /**
  * ID 生成器接口默认实现
  *
  * @author huangdaiyi
  * @since 1.0.0
  */
-@Component("idGenerator")
 public class DefaultIdGenerator implements IdGenerator {
 
     @Override

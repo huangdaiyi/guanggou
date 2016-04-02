@@ -1,7 +1,7 @@
 package com.hlhj.guanggou.po;
 
 public class CombinationProduct extends CombinationProductKey {
-    private Integer number;
+    private Integer number = 1;
 
     public Integer getNumber() {
         return number;

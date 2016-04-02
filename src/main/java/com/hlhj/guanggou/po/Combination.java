@@ -2,33 +2,39 @@ package com.hlhj.guanggou.po;
 
 import java.math.BigDecimal;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Combination {
     private String id;
-
+    
+    @NotEmpty
     private String name;
-
+    
+    @NotEmpty
     private String userId;
-
+    
+    @Length(min=0, max=500)
     private String description;
-
+    
+    @NotEmpty
     private String imageUrl;
 
     private String status;
-
+    
+    
     private BigDecimal price;
 
     private String createUser;
     
-    @JsonIgnore
-    private Long createTime;
+    private long createTime;
+    
+    private long lastEditTime;
     
     @JsonIgnore
-    private Long lastEditTime;
-    
-    @JsonIgnore
-    private Boolean isDelete;
+    private boolean isDelete = false;
 
     public String getId() {
         return id;
@@ -94,19 +100,19 @@ public class Combination {
         this.createUser = createUser == null ? null : createUser.trim();
     }
 
-    public Long getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Long createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
-    public Long getLastEditTime() {
+    public long getLastEditTime() {
         return lastEditTime;
     }
 
-    public void setLastEditTime(Long lastEditTime) {
+    public void setLastEditTime(long lastEditTime) {
         this.lastEditTime = lastEditTime;
     }
 

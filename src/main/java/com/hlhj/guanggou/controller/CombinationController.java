@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hlhj.guanggou.param.CombinationParam;
 import com.hlhj.guanggou.param.DelCombinationByIdParam;
-import com.hlhj.guanggou.param.GetCombinationDetailParam;
 import com.hlhj.guanggou.param.PagingCombinationParam;
 import com.hlhj.guanggou.param.UpdateCombinationParam;
 import com.hlhj.guanggou.po.Combination;
-import com.hlhj.guanggou.po.Response;
 import com.hlhj.guanggou.result.CombinationDetailResult;
+import com.hlhj.guanggou.result.PagingResult;
+import com.hlhj.guanggou.result.Response;
 import com.hlhj.guanggou.service.CombinationService;
 
 /**
@@ -33,7 +34,7 @@ public class CombinationController {
 	@Autowired
 	private CombinationService combinationService;
 
-	@RequestMapping("/add")
+	@RequestMapping(method=RequestMethod.POST)
 	public Response addCombination(
 			@Valid @RequestBody CombinationParam combinationParam) {
 		//TODO Validate
@@ -44,24 +45,32 @@ public class CombinationController {
 	public Response getCombinationPaging(@Valid @RequestBody PagingCombinationParam param){
 		
 		List<Combination> combinations = combinationService.getCombinationPaging(param);
-		return new Response().success(combinations);
+		return new Response().success(new PagingResult<>(combinations));
 	}
 	
-	@RequestMapping("/detail")
-	public Response getCombinationDetail(@Valid @RequestBody GetCombinationDetailParam param){
+	@RequestMapping(value="/{userId}/{combinationId}", method = RequestMethod.GET)
+	public Response getCombinationDetail(@PathVariable("userId") String userId,
+			@PathVariable("combinationId") String combinationId){
 		
-		CombinationDetailResult detailResult = combinationService.getCombinationDetail(param);
+		CombinationDetailResult detailResult = combinationService.getCombinationDetail(userId, combinationId);
 		return new Response().success(detailResult);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE)
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public Response delCombinationById(@Valid @RequestBody DelCombinationByIdParam param){
 		return combinationService.deleteCombinationByIds(param);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT)
-	public Response updateCombination(@Valid  @RequestBody UpdateCombinationParam combinationParam){
-		return combinationService.updateCombination(combinationParam);
+	@RequestMapping(value="/{combinationId}", method=RequestMethod.POST)
+	public Response updateCombination(@PathVariable("combinationId") String combinationId,
+			@Valid  @RequestBody UpdateCombinationParam combinationParam){
+		return combinationService.updateCombination(combinationId, combinationParam);
+	}
+	
+	@RequestMapping(value="/{combinationId}", method=RequestMethod.PUT)
+	public Response pulishCombination(@PathVariable("combinationId") String combinationId ){
+		
+		return combinationService.pulishCombination(combinationId);
 	}
 
 }

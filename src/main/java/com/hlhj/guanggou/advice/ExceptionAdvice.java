@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.hlhj.guanggou.exception.ServiceException;
 import com.hlhj.guanggou.exception.TokenException;
-import com.hlhj.guanggou.po.Response;
+import com.hlhj.guanggou.result.Response;
 
 /**
  * 用于处理所有的异常情况

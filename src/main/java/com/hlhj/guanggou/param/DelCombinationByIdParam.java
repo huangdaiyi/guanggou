@@ -7,14 +7,14 @@ package com.hlhj.guanggou.param;
  * @since 1.0.0
  */
 public class DelCombinationByIdParam extends BaseParam {
-	private String[] combinationIds;
+	private String[] combinations;
 
-	public String[] getCombinationIds() {
-		return combinationIds;
+	public String[] getCombinations() {
+		return combinations;
 	}
 
-	public void setCombinationIds(String[] combinationIds) {
-		this.combinationIds = combinationIds;
+	public void setCombinations(String[] combinationIds) {
+		this.combinations = combinationIds;
 	}
 	
 	

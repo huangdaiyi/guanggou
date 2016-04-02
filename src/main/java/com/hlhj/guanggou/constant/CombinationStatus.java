@@ -3,7 +3,7 @@ package com.hlhj.guanggou.constant;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum CombinationStatus {
+public enum CombinationStatus  {
 	PUBLISH("P"),
 	DRAFT("NP");
 	
@@ -27,5 +27,12 @@ public enum CombinationStatus {
 		}
 		throw new RuntimeException("Bad Combination status");
 	}
+
+	@Override
+	public String toString() {
+		return getStatus();
+	}
+	
+	
 	
 }

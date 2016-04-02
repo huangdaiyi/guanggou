@@ -1,13 +1,13 @@
 package com.hlhj.guanggou.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
 import com.hlhj.guanggou.mapper.UserFavoriteMapper;
-import com.hlhj.guanggou.po.Paging;
-import com.hlhj.guanggou.po.Response;
 import com.hlhj.guanggou.po.UserFavorite;
+import com.hlhj.guanggou.result.Response;
 import com.hlhj.guanggou.service.UserFavoriteService;
 import com.hlhj.guanggou.utils.StringUtil;
 
@@ -17,7 +17,6 @@ import com.hlhj.guanggou.utils.StringUtil;
  * @author huangdaiyi
  * @since 1.0.0
  */
-@Service
 public class UserFavoriteServiceImpl implements UserFavoriteService {
 	
 	@Autowired
@@ -42,7 +41,7 @@ public class UserFavoriteServiceImpl implements UserFavoriteService {
 	}
 
 	@Override
-	public Paging<UserFavorite> getFavoritePaging(String userId) {
+	public List<UserFavorite> getFavoritePaging(String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

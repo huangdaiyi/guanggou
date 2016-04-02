@@ -65,10 +65,12 @@
   <insert id="batchInsert" parameterType="list">
 		insert into t_combination_product (combination_id, product_id,
 		product_num )
-		<foreach collection="list" item="item" index="index" open=" values (" separator="," close=")" >
-			#{item.combinationId,jdbcType=CHAR}, 
-			#{item.productId,jdbcType=INTEGER},
-			#{item.productNum,jdbcType=INTEGER}
+		<foreach collection="list" item="item" index="index" open="values" separator=","  >
+			(
+				#{item.combinationId,jdbcType=CHAR}, 
+				#{item.productId,jdbcType=INTEGER},
+				#{item.number,jdbcType=INTEGER}
+			)
 		</foreach>
 	</insert>
   

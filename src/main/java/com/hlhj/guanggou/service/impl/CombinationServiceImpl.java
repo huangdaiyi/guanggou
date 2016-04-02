@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Preconditions;
 import com.hlhj.guanggou.constant.CombinationStatus;
@@ -13,17 +13,17 @@ import com.hlhj.guanggou.mapper.CombinationMapper;
 import com.hlhj.guanggou.mapper.CombinationProductMapper;
 import com.hlhj.guanggou.param.CombinationParam;
 import com.hlhj.guanggou.param.DelCombinationByIdParam;
-import com.hlhj.guanggou.param.GetCombinationDetailParam;
+import com.hlhj.guanggou.param.ModifyItemMarkParam;
 import com.hlhj.guanggou.param.PagingCombinationParam;
 import com.hlhj.guanggou.param.UpdateCombinationParam;
-import com.hlhj.guanggou.param.UpdateCombinationParam.ModifyMark;
 import com.hlhj.guanggou.po.Combination;
 import com.hlhj.guanggou.po.CombinationProduct;
 import com.hlhj.guanggou.po.CombinationProductKey;
-import com.hlhj.guanggou.po.Response;
 import com.hlhj.guanggou.result.CombinationDetailResult;
+import com.hlhj.guanggou.result.Response;
 import com.hlhj.guanggou.service.CombinationService;
 import com.hlhj.guanggou.utils.CollectionUtil;
+import com.hlhj.guanggou.utils.DatetUtil;
 import com.hlhj.guanggou.utils.StringUtil;
 
 /**
@@ -32,7 +32,6 @@ import com.hlhj.guanggou.utils.StringUtil;
  * @author huangdaiyi
  * @since 1.0.0
  */
-@Service
 public class CombinationServiceImpl implements CombinationService{
 	
 	@Autowired
@@ -45,6 +44,7 @@ public class CombinationServiceImpl implements CombinationService{
 	private IdGenerator idGenerator;
 	
 	@Override
+	@Transactional
 	public Response insert(CombinationParam combination) {
 		
 		Preconditions.checkNotNull(combination);
@@ -53,6 +53,11 @@ public class CombinationServiceImpl implements CombinationService{
 		
 		Combination combinationBase = combination.getCombination();
 		combinationBase.setId(idGenerator.generateId());
+		long now = DatetUtil.getNow();
+		combinationBase.setCreateTime(now);
+		combinationBase.setLastEditTime(now);
+		combinationBase.setCreateUser(combinationBase.getUserId());
+		combinationBase.setStatus(CombinationStatus.DRAFT.getStatus());
 		List<CombinationProduct> comPorductitems = combination.getProducts();
 		
 		combinationMapper.insert(combinationBase);
@@ -76,44 +81,44 @@ public class CombinationServiceImpl implements CombinationService{
 	}
 
 	@Override
-	public CombinationDetailResult getCombinationDetail(GetCombinationDetailParam param) {
+	public CombinationDetailResult getCombinationDetail(String userId, String combinationId) {
 		
-		Preconditions.checkNotNull(param);
-		Preconditions.checkArgument(StringUtil.isNotEmpty(param.getUserId()) 
-				&& StringUtil.isNotEmpty(param.getCombinationId()));
+		Preconditions.checkArgument(StringUtil.isNotEmpty(userId) 
+				&& StringUtil.isNotEmpty(combinationId));
 		
-		return combinationMapper.getCombinationDetail(param.getUserId(), param.getCombinationId());
+		return combinationMapper.getCombinationDetail(userId, combinationId);
 	}
 
 	@Override
 	public Response deleteCombinationByIds(DelCombinationByIdParam param) {
 		Preconditions.checkNotNull(param);
 		Preconditions.checkArgument(StringUtil.isNotEmpty(param.getUserId()) &&
-				CollectionUtil.isNotEmpty(param.getCombinationIds()));
+				CollectionUtil.isNotEmpty(param.getCombinations()));
 
-		int effect = combinationMapper.deleteByIds(param.getUserId(), param.getCombinationIds());
+		int effect = combinationMapper.deleteByIds(param.getUserId(), param.getCombinations());
 		return Response.getResponse(effect);
 	}
 
 	@Override
-	public Response updateCombination(UpdateCombinationParam combination) {
+	public Response updateCombination(String combinationId, UpdateCombinationParam combination) {
 		Preconditions.checkNotNull(combination);
 		Preconditions.checkNotNull(combination.getCombination());
 		Preconditions.checkArgument(CollectionUtil.isNotEmpty(combination.getProducts())
-				&& StringUtil.isNotEmpty(combination.getCombination().getId()));
+				&& StringUtil.isNotEmpty(combinationId));
 		
 		Combination tempCombination = combination.getCombination();
+		tempCombination.setId(combinationId);
 		if(combination.isModify()){
-			combinationMapper.updateByPrimaryKey(tempCombination);
+			combinationMapper.updateByPrimaryKeySelective(tempCombination);
 		}
 		
-		List<ModifyMark> marks = combination.getProducts();
+		List<ModifyItemMarkParam> marks = combination.getProducts();
 		
 		List<CombinationProduct> addList = new ArrayList<CombinationProduct>();
 		List<CombinationProductKey>	delList = new ArrayList<CombinationProductKey>();
 		
 		CombinationProduct tempComProd = null;
-		for (ModifyMark mark : marks) {
+		for (ModifyItemMarkParam mark : marks) {
 			tempComProd = new CombinationProduct();
 			tempComProd.setCombinationId(tempCombination.getId());
 			tempComProd.setProductId(mark.getProductId());
@@ -153,7 +158,7 @@ public class CombinationServiceImpl implements CombinationService{
 		combination.setId(combinationId);
 		combination.setStatus(CombinationStatus.PUBLISH.getStatus());
 		
-		int effect = combinationMapper.updateByPrimaryKey(combination);
+		int effect = combinationMapper.updateByPrimaryKeySelective(combination);
 		return Response.getResponse(effect);
 	}
 

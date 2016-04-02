@@ -1,12 +1,13 @@
 package com.hlhj.guanggou.service;
 
-import com.hlhj.guanggou.po.Paging;
-import com.hlhj.guanggou.po.Response;
+import java.util.List;
+
 import com.hlhj.guanggou.po.UserFavorite;
+import com.hlhj.guanggou.result.Response;
 
 public interface UserFavoriteService {
 	
 	Response insert(UserFavorite favorite);
 	Response delete(int id);
-	Paging<UserFavorite> getFavoritePaging(String userId);
+	List<UserFavorite> getFavoritePaging(String userId);
 }

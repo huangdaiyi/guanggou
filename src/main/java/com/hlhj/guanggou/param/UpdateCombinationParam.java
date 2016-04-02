@@ -1,9 +1,7 @@
 package com.hlhj.guanggou.param;
 
-
 import java.util.List;
 
-import com.hlhj.guanggou.constant.OperateMark;
 import com.hlhj.guanggou.po.Combination;
 
 /**
@@ -17,7 +15,7 @@ public class UpdateCombinationParam {
 	private Combination combination;
 	private boolean modify = false;
 	
-	private List<ModifyMark> products;
+	private List<ModifyItemMarkParam> products;
 	
 	public Combination getCombination() {
 		return combination;
@@ -27,11 +25,11 @@ public class UpdateCombinationParam {
 		this.combination = combination;
 	}
 
-	public List<ModifyMark> getProducts() {
+	public List<ModifyItemMarkParam> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<ModifyMark> products) {
+	public void setProducts(List<ModifyItemMarkParam> products) {
 		this.products = products;
 	}
 
@@ -42,31 +40,5 @@ public class UpdateCombinationParam {
 	public void setModify(boolean modify) {
 		this.modify = modify;
 	}
-
-	public class ModifyMark{
-		private int productId;
-		private int number = 0;
-		private OperateMark mark;
-		
-		public int getProductId() {
-			return productId;
-		}
-		public void setProductId(int productId) {
-			this.productId = productId;
-		}
-		
-		public int getNumber() {
-			return number;
-		}
-		public void setNumber(int number) {
-			this.number = number;
-		}
-		public OperateMark getMark() {
-			return mark;
-		}
-		public void setMark(OperateMark mark) {
-			this.mark = mark;
-		}
-		
-	}
+	
 }

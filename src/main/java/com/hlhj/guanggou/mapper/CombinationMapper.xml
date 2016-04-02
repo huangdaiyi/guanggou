@@ -47,16 +47,16 @@
 		select
 		<include refid="Base_Column_List" />
 		from t_combination
-		where id = #{id,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR} and is_delete = 0
 	</select>
 	<select id="selectPaging" resultMap="BaseResultMap"
 		parameterType="com.hlhj.guanggou.param.PagingCombinationParam">
 		select
 		<include refid="Base_Column_List" />
 		from t_combination
-		where status = #{status, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler} 
+		where is_delete = 0 
+		and status = #{status, typeHandler=com.hlhj.guanggou.constant.EnumStatusHandler} 
 		order by last_edit_time desc 
-		limit #{pageIndex, jdbcType=INTEGER} * #{pageSize, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER} 
 	</select>
 	<select id="getCombinationDetail" resultMap="CombinationDetailResult">
 		select p.`id` as p_id, 
@@ -78,7 +78,7 @@
 			from t_product p 
 			inner join t_combination_product cp on p.id = cp.product_id
 			inner join t_combination c
-			where cp.combination_id = #{combinationId} and c.user_id = #{userId}
+			where cp.combination_id = #{combinationId} and c.user_id = #{userId} and c.is_delete=0
 	</select>
 	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -87,8 +87,8 @@
 	</delete>
 	
 	<delete id="deleteByIds" >
-		delete from t_combination
-		where user_id = #{userId,jdbcType=CHAR} 
+		update t_combination set is_delete = 1
+		where user_id = #{userId,jdbcType=CHAR}
 		<foreach collection="combinationIds" item="item" index="index" open=" and id in (" separator="," close=")" >
 			#{item,jdbcType=CHAR}
 		</foreach>

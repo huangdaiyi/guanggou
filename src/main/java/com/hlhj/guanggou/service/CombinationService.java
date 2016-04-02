@@ -4,12 +4,11 @@ import java.util.List;
 
 import com.hlhj.guanggou.param.CombinationParam;
 import com.hlhj.guanggou.param.DelCombinationByIdParam;
-import com.hlhj.guanggou.param.GetCombinationDetailParam;
 import com.hlhj.guanggou.param.PagingCombinationParam;
 import com.hlhj.guanggou.param.UpdateCombinationParam;
 import com.hlhj.guanggou.po.Combination;
-import com.hlhj.guanggou.po.Response;
 import com.hlhj.guanggou.result.CombinationDetailResult;
+import com.hlhj.guanggou.result.Response;
 
 public interface CombinationService {
 	
@@ -17,11 +16,11 @@ public interface CombinationService {
 	
 	List<Combination> getCombinationPaging(PagingCombinationParam param);
 	
-	CombinationDetailResult getCombinationDetail(GetCombinationDetailParam param);
+	CombinationDetailResult getCombinationDetail(String userId, String combinationId);
 	
 	Response deleteCombinationByIds(DelCombinationByIdParam param);
 	
-	Response updateCombination(UpdateCombinationParam combination);
+	Response updateCombination(String combinationId, UpdateCombinationParam combination);
 	
 	Response pulishCombination(String combinationId);
 

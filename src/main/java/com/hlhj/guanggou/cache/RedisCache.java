@@ -5,7 +5,7 @@ import org.apache.ibatis.cache.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hlhj.guanggou.utils.SerializeUtils;
+import com.hlhj.guanggou.utils.SerializeUtil;
 
 import redis.clients.jedis.Jedis;
 
@@ -61,7 +61,7 @@ public class RedisCache implements Cache {
         boolean success = true;
         Jedis client = RedisClient.getResource();
         try {
-            client.set(SerializeUtils.serialize(key), SerializeUtils.serialize(value));
+            client.set(SerializeUtil.serialize(key), SerializeUtil.serialize(value));
         } catch (Exception e) {
             success = false;
             if (client != null) {
@@ -81,7 +81,7 @@ public class RedisCache implements Cache {
         boolean success = true;
         Jedis client = RedisClient.getResource();
         try {
-            value = SerializeUtils.unserialize(client.get(SerializeUtils.serialize(key)));
+            value = SerializeUtil.unserialize(client.get(SerializeUtil.serialize(key)));
         } catch (Exception e) {
             success = false;
             if (client != null) {
@@ -102,7 +102,7 @@ public class RedisCache implements Cache {
         boolean success = true;
         Jedis client = RedisClient.getResource();
         try {
-            value = client.expire(SerializeUtils.serialize(key), 0);
+            value = client.expire(SerializeUtil.serialize(key), 0);
         } catch (Exception e) {
             success = false;
             if (client != null) {
