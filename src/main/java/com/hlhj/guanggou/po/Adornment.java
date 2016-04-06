@@ -1,5 +1,10 @@
 package com.hlhj.guanggou.po;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Adornment {
     private String id;
 
@@ -12,7 +17,8 @@ public class Adornment {
     private String shopId;
 
     private String marketId;
-
+    
+    @JsonProperty("userId")
     private String createUser;
 
     private Long createTime;
@@ -24,7 +30,8 @@ public class Adornment {
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
-
+    
+    @NotBlank
     public String getName() {
         return name;
     }
@@ -36,19 +43,24 @@ public class Adornment {
     public String getImageUrl() {
         return imageUrl;
     }
-
+    
+    @NotBlank
+    @Length(max=224)
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl == null ? null : imageUrl.trim();
     }
-
+    
+    @Length(max=224)
     public String getDescription() {
         return description;
     }
-
+    
+    @Length(max=200)
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
 
+    @NotBlank
     public String getShopId() {
         return shopId;
     }
@@ -56,7 +68,8 @@ public class Adornment {
     public void setShopId(String shopId) {
         this.shopId = shopId == null ? null : shopId.trim();
     }
-
+    
+    @NotBlank
     public String getMarketId() {
         return marketId;
     }

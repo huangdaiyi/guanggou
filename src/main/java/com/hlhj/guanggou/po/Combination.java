@@ -10,16 +10,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Combination {
     private String id;
     
-    @NotEmpty
+    
     private String name;
     
-    @NotEmpty
     private String userId;
     
-    @Length(min=0, max=500)
     private String description;
     
-    @NotEmpty
     private String imageUrl;
 
     private String status;
@@ -43,7 +40,9 @@ public class Combination {
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
-
+    
+    @NotEmpty
+    @Length(min=1, max=500)
     public String getName() {
         return name;
     }
@@ -51,15 +50,18 @@ public class Combination {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
-
+    
+    @NotEmpty
     public String getUserId() {
         return userId;
     }
-
+    
+    
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
     }
-
+    
+    @Length(min=0, max=500)
     public String getDescription() {
         return description;
     }

@@ -11,10 +11,9 @@
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd ">
 
-	<!-- 加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则 -->
 	<context:property-placeholder location="classpath:db.properties" />
-	<!-- 配置数据源 ，dbcp -->
-
+	
+	<!-- 配置数据源  -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="${jdbc.driver}" />

@@ -3,6 +3,7 @@ package com.hlhj.guanggou.param;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.hlhj.guanggou.po.Combination;
@@ -10,12 +11,12 @@ import com.hlhj.guanggou.po.CombinationProduct;
 
 public class CombinationParam extends BaseParam{
 	
-	@NotNull
 	private Combination combination;
 	
-	@NotNull
 	private List<CombinationProduct> products;
-
+	
+	@NotNull
+	@Valid
 	public Combination getCombination() {
 		return combination;
 	}
@@ -24,7 +25,7 @@ public class CombinationParam extends BaseParam{
 		this.combination = combination;
 	}
 	
-	
+	@NotNull
 	public List<CombinationProduct> getProducts() {
 		return products;
 	}

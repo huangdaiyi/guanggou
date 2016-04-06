@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.hlhj.guanggou</groupId>
-	<artifactId>guanggou-api</artifactId>
+	<artifactId>promotion-api</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 
@@ -28,7 +28,7 @@
 		<jackson.version>2.7.3</jackson.version>
 		<hibernate-validator.version>5.3.0.Alpha1</hibernate-validator.version>
 		<commons-lang.version>3.4</commons-lang.version>
-        <commons-collections.version>4.0</commons-collections.version>
+		<commons-collections.version>4.0</commons-collections.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
@@ -82,7 +82,7 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<!-- Spring AOP -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -114,14 +114,14 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis-spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>${c3p0.version}</version>
 			<scope>compile</scope>
 		</dependency>
-				
+
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
@@ -138,21 +138,21 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang.version}</version>
 		</dependency>
-		
+
 		<!-- Commons Collections -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>${commons-collections.version}</version>
-        </dependency>
-        
-        <!-- Hibernate Validator -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
-        </dependency>
-		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${commons-collections.version}</version>
+		</dependency>
+
+		<!-- Hibernate Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+
 		<!-- Mysql driver -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -164,7 +164,7 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
-		</dependency>		
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -173,6 +173,13 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
 			</resource>
 		</resources>
 		<plugins>
@@ -202,7 +209,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven-war-plugin.version}</version>
 				<configuration>
-					<warName>guanggou</warName>
+					<warName>promotion</warName>
 				</configuration>
 			</plugin>
 		</plugins>

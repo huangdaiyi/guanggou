@@ -23,5 +23,7 @@ public interface CombinationService {
 	Response updateCombination(String combinationId, UpdateCombinationParam combination);
 	
 	Response pulishCombination(String combinationId);
+	
+	List<Combination> getCombinationByTopic(String userId, String topicId);
 
 }

@@ -25,5 +25,7 @@ public interface CombinationMapper {
     
     int deleteByIds(@Param("userId") String userId, @Param("combinationIds") String[] ids);
     
-    public CombinationDetailResult getCombinationDetail(@Param("userId") String userId, @Param("combinationId")String combinationId); 
+    CombinationDetailResult getCombinationDetail(@Param("userId") String userId, @Param("combinationId")String combinationId);
+    
+    List<Combination> selectByTopicId(@Param("userId") String userId, @Param("topicId") String topicId);
 }

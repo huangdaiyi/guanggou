@@ -37,7 +37,7 @@ public class CombinationController {
 	@RequestMapping(method=RequestMethod.POST)
 	public Response addCombination(
 			@Valid @RequestBody CombinationParam combinationParam) {
-		//TODO Validate
+		
 		return combinationService.insert(combinationParam);
 	}
 	
@@ -72,5 +72,15 @@ public class CombinationController {
 		
 		return combinationService.pulishCombination(combinationId);
 	}
+	
+	@RequestMapping(value="/topic/{userId}/{topicId}", method=RequestMethod.GET)
+	public Response getCombinationByTopic(@PathVariable("userId") String userId,
+			@PathVariable("topicId")String topicId ){
+		
+		List<Combination> combinations = combinationService.getCombinationByTopic(userId, topicId);
+		
+		return new Response().success(combinations);
+	}
+	
 
 }

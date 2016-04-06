@@ -17,12 +17,13 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectPaging" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_user_favorite
-    where user_id = #{userId,jdbcType=INTEGER} order by create_time desc 
-	limit #{pageIndex, jdbcType=INTEGER} * #{pageSize, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}  
+  <select id="selectPaging" resultType="com.hlhj.guanggou.result.FavoriteProduct"  parameterType="com.hlhj.guanggou.param.BasePagingParam" >
+    select  p.`id`, p.`name`, p.price ,p.picture, p.catalogID as catalogId
+    	from t_user_favorite f 
+    	inner join t_product p 
+    	on f.product_id = p.id 
+    	where f.user_id = #{userId,jdbcType=INTEGER} 
+    	order by f.create_time desc 
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

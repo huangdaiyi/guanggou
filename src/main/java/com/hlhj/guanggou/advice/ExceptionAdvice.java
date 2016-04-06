@@ -37,7 +37,7 @@ import com.hlhj.guanggou.result.Response;
 public class ExceptionAdvice {
 
     private static Logger logger = LoggerFactory.getLogger(ExceptionAdvice.class);
-
+    
     /**
      * 400 - Bad Request
      */

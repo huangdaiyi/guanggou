@@ -1,19 +1,23 @@
 package com.hlhj.guanggou.po;
 
-public class UserFavorite {
-    private Integer id;
+import org.hibernate.validator.constraints.NotEmpty;
 
+public class UserFavorite {
+	
+    private int id;
+    
+    @NotEmpty
     private String userId;
 
-    private Integer productId;
+    private int productId;
 
-    private Long createTime;
+    private long createTime;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -25,7 +29,7 @@ public class UserFavorite {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getProductId() {
+    public int getProductId() {
         return productId;
     }
 
@@ -33,11 +37,11 @@ public class UserFavorite {
         this.productId = productId;
     }
 
-    public Long getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Long createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 }

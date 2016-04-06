@@ -14,4 +14,5 @@
 	<bean id="idGenerator" class="com.hlhj.guanggou.id.impl.DefaultIdGenerator"></bean>
 	<bean id="combinationService" class="com.hlhj.guanggou.service.impl.CombinationServiceImpl"></bean>
 	<bean id="userFavoriteService" class="com.hlhj.guanggou.service.impl.UserFavoriteServiceImpl"></bean>
+	<bean id="adornmentService" class="com.hlhj.guanggou.service.impl.AdornmentServiceImpl"></bean>
 </beans>

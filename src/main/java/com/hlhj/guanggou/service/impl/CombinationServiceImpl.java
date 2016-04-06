@@ -162,4 +162,13 @@ public class CombinationServiceImpl implements CombinationService{
 		return Response.getResponse(effect);
 	}
 
+	@Override
+	public List<Combination> getCombinationByTopic(String userId, String topicId) {
+		
+		Preconditions.checkArgument(StringUtil.isNotEmpty(userId) &&
+				StringUtil.isNotEmpty(topicId));
+		
+		return combinationMapper.selectByTopicId(userId, topicId);
+	}
+
 }

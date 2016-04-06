@@ -2,7 +2,9 @@ package com.hlhj.guanggou.mapper;
 
 import java.util.List;
 
+import com.hlhj.guanggou.param.BasePagingParam;
 import com.hlhj.guanggou.po.UserFavorite;
+import com.hlhj.guanggou.result.FavoriteProduct;
 
 public interface UserFavoriteMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,5 +19,5 @@ public interface UserFavoriteMapper {
 
     int updateByPrimaryKey(UserFavorite record);
     
-    List<UserFavorite> selectPaging(UserFavorite param);
+    List<FavoriteProduct> selectPaging(BasePagingParam param);
 }

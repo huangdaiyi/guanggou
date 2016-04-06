@@ -81,6 +81,15 @@
 			where cp.combination_id = #{combinationId} and c.user_id = #{userId} and c.is_delete=0
 	</select>
 	
+	<select id="selectByTopicId" resultMap="BaseResultMap">
+		select c.id, c.`name`, c.user_id, 
+				c.description, c.image_url, c.`status`,
+				c.price, c.create_user, c.create_time, c.last_edit_time 
+			from  t_combination c
+			inner join t_combination_topic ct on c.id = ct.combination_id
+			where  ct.topic_id = #{topicId} and c.user_id = #{userId} and c.is_delete=0
+	</select>
+	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
 		delete from t_combination
 		where id = #{id,jdbcType=CHAR}
