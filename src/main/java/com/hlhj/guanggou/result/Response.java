@@ -66,9 +66,13 @@ public class Response {
 		this.message = message;
 	}
 	
-	public static Response getResponse(int effect) {
+	public static Response getResponse(int effect, Object data) {
 		Response response = new Response();
-		return effect > 0 ? response.success() : response.failure();
+		return effect > 0 ? response.success(data) : response.failure();
+	}
+	
+	public static Response getResponse(int effect){
+		return getResponse(effect, null);
 	}
 
 }

@@ -28,7 +28,8 @@
 			 <result property="createTime" column="create_time"></result>
 			 <result property="lastEditTime" column="last_edit_time"></result>
 		</association>
-		<collection property="products" javaType="com.hlhj.guanggou.po.Product">
+		
+		<collection property="products" ofType="product" >
 			<id property="id"  column="p_id"></id>
 			<result property="name" column="p_name"></result>
 			<result property="price" column="p_price"></result>
@@ -54,7 +55,8 @@
 		select
 		<include refid="Base_Column_List" />
 		from t_combination
-		where is_delete = 0 
+		where user_id = #{userId,jdbcType=CHAR} 
+		and is_delete = 0 
 		and status = #{status, typeHandler=com.hlhj.guanggou.constant.EnumStatusHandler} 
 		order by last_edit_time desc 
 	</select>
@@ -80,7 +82,7 @@
 			inner join t_combination c
 			where cp.combination_id = #{combinationId} and c.user_id = #{userId} and c.is_delete=0
 	</select>
-	
+		
 	<select id="selectByTopicId" resultMap="BaseResultMap">
 		select c.id, c.`name`, c.user_id, 
 				c.description, c.image_url, c.`status`,

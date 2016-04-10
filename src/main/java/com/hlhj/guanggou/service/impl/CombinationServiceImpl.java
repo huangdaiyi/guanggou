@@ -68,7 +68,7 @@ public class CombinationServiceImpl implements CombinationService{
 		}
 		
 		combinationProductMapper.batchInsert(comPorductitems);
-		return new Response().success();
+		return new Response().success(combinationBase);
 	}
 
 	@Override

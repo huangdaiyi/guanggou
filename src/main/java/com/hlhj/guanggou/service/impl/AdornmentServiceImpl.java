@@ -35,7 +35,7 @@ public class AdornmentServiceImpl implements AdornmentService {
 		
 		adornment.setCreateTime(DatetUtil.getNow());
 		adornment.setId(idGenerator.generateId());
-		return Response.getResponse(adornmentMapper.insert(adornment));
+		return Response.getResponse(adornmentMapper.insert(adornment), adornment);
 	}
 
 	@Override

@@ -39,13 +39,14 @@ public class Adornment {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
-
+    
+    @NotBlank
+    @Length(max=224)
     public String getImageUrl() {
         return imageUrl;
     }
     
-    @NotBlank
-    @Length(max=224)
+   
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl == null ? null : imageUrl.trim();
     }
@@ -55,12 +56,11 @@ public class Adornment {
         return description;
     }
     
-    @Length(max=200)
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
 
-    @NotBlank
+    //@NotBlank
     public String getShopId() {
         return shopId;
     }
@@ -69,7 +69,7 @@ public class Adornment {
         this.shopId = shopId == null ? null : shopId.trim();
     }
     
-    @NotBlank
+    //@NotBlank
     public String getMarketId() {
         return marketId;
     }

@@ -33,7 +33,7 @@ public class UserFavoriteServiceImpl implements UserFavoriteService {
 		
 		favorite.setCreateTime(DatetUtil.getNow());
 		int effect = userFavoriteMapper.insert(favorite);
-		return Response.getResponse(effect);
+		return Response.getResponse(effect, favorite);
 	}
 
 	@Override
