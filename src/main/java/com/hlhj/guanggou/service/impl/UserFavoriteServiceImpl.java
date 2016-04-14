@@ -31,6 +31,12 @@ public class UserFavoriteServiceImpl implements UserFavoriteService {
 		Preconditions.checkArgument(StringUtil.isNotEmpty(favorite.getUserId())
 				&& favorite.getProductId() > 0);
 		
+		UserFavorite existFavorite = userFavoriteMapper.selectByUserProductId(favorite.getUserId(), favorite.getProductId());
+		
+		if (existFavorite != null) {
+			return new Response().failure("The product is already exist!");
+		}
+		
 		favorite.setCreateTime(DatetUtil.getNow());
 		int effect = userFavoriteMapper.insert(favorite);
 		return Response.getResponse(effect, favorite);
@@ -52,4 +58,11 @@ public class UserFavoriteServiceImpl implements UserFavoriteService {
 				param.getPageSize() > 0);
 		return userFavoriteMapper.selectPaging(param);
 	}
+
+	@Override
+	public Response deleteByUserProductId(String userId, int productId) {
+		Preconditions.checkArgument(StringUtil.isNotEmpty(userId)&& productId > 0);
+		return Response.getResponse(userFavoriteMapper.deleteByUserProductId(userId, productId));
+	}
+
 }

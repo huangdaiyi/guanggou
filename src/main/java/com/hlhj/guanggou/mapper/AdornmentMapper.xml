@@ -32,6 +32,15 @@
     delete from t_adornment
     where id = #{id,jdbcType=CHAR}
   </delete>
+  
+  <delete id="deleteByIds" >
+		delete from t_adornment
+		where create_user = #{userId,jdbcType=CHAR}
+		<foreach collection="adornmentIds" item="item" index="index" open=" and id in (" separator="," close=")" >
+			#{item,jdbcType=CHAR}
+		</foreach>
+	</delete>
+  
   <insert id="insert" parameterType="com.hlhj.guanggou.po.Adornment" >
     insert into t_adornment (id, name, image_url, 
       description, shop_id, market_id, 

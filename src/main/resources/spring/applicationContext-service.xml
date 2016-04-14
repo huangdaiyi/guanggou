@@ -10,9 +10,14 @@
 		http://www.springframework.org/schema/context/spring-context-4.1.xsd 
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
-		
+	
 	<bean id="idGenerator" class="com.hlhj.guanggou.id.impl.DefaultIdGenerator"></bean>
 	<bean id="combinationService" class="com.hlhj.guanggou.service.impl.CombinationServiceImpl"></bean>
 	<bean id="userFavoriteService" class="com.hlhj.guanggou.service.impl.UserFavoriteServiceImpl"></bean>
 	<bean id="adornmentService" class="com.hlhj.guanggou.service.impl.AdornmentServiceImpl"></bean>
+
+	<bean id="promotionService" class="com.hlhj.guanggou.service.impl.PromotionServiceImpl">
+		<property name="activityRuleBeanName" value="${activity.rule.beans}" />
+		<property name="ruleFiltersBeanName" value="${activity.filter.beans}" />
+	</bean>
 </beans>

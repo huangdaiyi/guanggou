@@ -42,7 +42,7 @@ public class Combination {
     }
     
     @NotEmpty
-    @Length(min=1, max=500)
+    @Length(min=1, max=45)
     public String getName() {
         return name;
     }
@@ -69,7 +69,9 @@ public class Combination {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
-
+    
+    @NotEmpty
+    @Length(min=1, max=224)
     public String getImageUrl() {
         return imageUrl;
     }

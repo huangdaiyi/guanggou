@@ -12,4 +12,5 @@ public interface UserFavoriteService {
 	Response insert(UserFavorite favorite);
 	Response delete(int id);
 	List<FavoriteProduct> getFavoritePaging(BasePagingParam param);
+	Response deleteByUserProductId(String userId, int productId);
 }

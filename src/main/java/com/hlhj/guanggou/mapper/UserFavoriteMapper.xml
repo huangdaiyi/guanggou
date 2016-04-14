@@ -17,6 +17,13 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
+  <select id="selectByUserProductId" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_favorite
+    where user_id = #{userId,jdbcType=VARCHAR} and product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  
   <select id="selectPaging" resultType="com.hlhj.guanggou.result.FavoriteProduct"  parameterType="com.hlhj.guanggou.param.BasePagingParam" >
     select  p.`id`, p.`name`, p.price ,p.picture, p.catalogID as catalogId
     	from t_user_favorite f 
@@ -26,10 +33,16 @@
     	order by f.create_time desc 
   </select>
   
+  <delete id="deleteByUserProductId" >
+    delete from t_user_favorite
+   	where user_id = #{userId,jdbcType=VARCHAR} and product_id = #{productId,jdbcType=INTEGER}
+  </delete>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user_favorite
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
   <insert id="insert" parameterType="com.hlhj.guanggou.po.UserFavorite" >
     insert into t_user_favorite (id, user_id, product_id, 
       create_time)

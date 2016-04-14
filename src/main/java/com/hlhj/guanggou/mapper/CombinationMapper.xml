@@ -79,8 +79,9 @@
 					c.last_edit_time 
 			from t_product p 
 			inner join t_combination_product cp on p.id = cp.product_id
-			inner join t_combination c
-			where cp.combination_id = #{combinationId} and c.user_id = #{userId} and c.is_delete=0
+			inner join t_combination c on c.id = cp.combination_id
+			where c.id = #{combinationId} and c.user_id = #{userId} and c.is_delete=0
+			order by p_id 
 	</select>
 		
 	<select id="selectByTopicId" resultMap="BaseResultMap">
@@ -88,13 +89,13 @@
 				c.description, c.image_url, c.`status`,
 				c.price, c.create_user, c.create_time, c.last_edit_time 
 			from  t_combination c
-			inner join t_combination_topic ct on c.id = ct.combination_id
-			where  ct.topic_id = #{topicId} and c.user_id = #{userId} and c.is_delete=0
+			inner join t_combination_topic ct on c.id = ct.combination_id 
+			where ct.topic_id = #{topicId} and c.user_id = #{userId} and c.is_delete=0
 	</select>
 	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from t_combination
-		where id = #{id,jdbcType=CHAR}
+		delete from t_combination 
+		where id = #{id}
 	</delete>
 	
 	<delete id="deleteByIds" >

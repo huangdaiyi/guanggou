@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,5 +43,11 @@ public class FavoriteController {
 		List<FavoriteProduct> favList = favoriteService.getFavoritePaging(param);
 		return new Response().success(new PagingResult<>(favList));
 	}
+	
+	@RequestMapping(value = "/{userId}/{productId}", method = RequestMethod.DELETE)
+	public Response deleteByProductId(@PathVariable("userId") String userId, @PathVariable("productId") int productId) {
 
+		return favoriteService.deleteByUserProductId(userId, productId);
+	}
+	
 }

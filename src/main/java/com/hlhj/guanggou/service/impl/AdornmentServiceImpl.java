@@ -8,9 +8,11 @@ import com.google.common.base.Preconditions;
 import com.hlhj.guanggou.id.IdGenerator;
 import com.hlhj.guanggou.mapper.AdornmentMapper;
 import com.hlhj.guanggou.param.BasePagingParam;
+import com.hlhj.guanggou.param.DelAdronmentParam;
 import com.hlhj.guanggou.po.Adornment;
 import com.hlhj.guanggou.result.Response;
 import com.hlhj.guanggou.service.AdornmentService;
+import com.hlhj.guanggou.utils.CollectionUtil;
 import com.hlhj.guanggou.utils.DatetUtil;
 import com.hlhj.guanggou.utils.StringUtil;
 
@@ -53,6 +55,18 @@ public class AdornmentServiceImpl implements AdornmentService {
 				param.getPageSize() > 0);
 		
 		return adornmentMapper.selectPaging(param);
+	}
+
+	@Override
+	public Response batchDelete(DelAdronmentParam param) {
+		
+		Preconditions.checkNotNull(param);
+		Preconditions.checkArgument(StringUtil.isNotEmpty(param.getUserId())&&
+				CollectionUtil.isNotEmpty(param.getAdornmentIds()));
+		
+		int effect = adornmentMapper.deleteByIds(param.getUserId(), param.getAdornmentIds());
+		
+		return Response.getResponse(effect);
 	}
 	
 }

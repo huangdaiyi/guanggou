@@ -1,5 +1,6 @@
 package com.hlhj.guanggou.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +58,12 @@ public class CombinationServiceImpl implements CombinationService{
 		combinationBase.setCreateTime(now);
 		combinationBase.setLastEditTime(now);
 		combinationBase.setCreateUser(combinationBase.getUserId());
-		combinationBase.setStatus(CombinationStatus.DRAFT.getStatus());
+		//combinationBase.setStatus(CombinationStatus.DRAFT.getStatus());
 		List<CombinationProduct> comPorductitems = combination.getProducts();
+		
+		if(combinationBase.getPrice() == null || combinationBase.getPrice().longValue() < 0L){
+			combinationBase.setPrice(BigDecimal.ZERO);
+		}
 		
 		combinationMapper.insert(combinationBase);
 		

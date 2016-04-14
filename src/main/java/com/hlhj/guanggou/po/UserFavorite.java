@@ -2,8 +2,11 @@ package com.hlhj.guanggou.po;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class UserFavorite {
 	
+	@JsonIgnore
     private int id;
     
     @NotEmpty

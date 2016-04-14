@@ -78,7 +78,6 @@ public class CombinationController {
 			@PathVariable("topicId")String topicId ){
 		
 		List<Combination> combinations = combinationService.getCombinationByTopic(userId, topicId);
-		
 		return new Response().success(combinations);
 	}
 	
